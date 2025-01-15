@@ -29,26 +29,26 @@
 ?>
 <?php include_once('layouts/header.php'); ?>
 
-  <div class="row">
+  <!-- <div class="row"> -->
      <div class="col-md-12">
        <?php echo display_msg($msg); ?>
      </div>
   </div>
-   <div class="row">
+   <!-- <div class="row"> -->
     <div class="col-md-5">
       <div class="panel panel-default">
         <div class="panel-heading">
           <strong>
             <span class="glyphicon glyphicon-th"></span>
-            <span>Agregar categoría</span>
+            <span>Agregar Estatus</span>
          </strong>
         </div>
         <div class="panel-body">
           <form method="post" action="categorie.php">
             <div class="form-group">
-                <input type="text" class="form-control" name="categorie-name" placeholder="Nombre de la categoría" required>
+                <input type="text" class="form-control" name="categorie-name" placeholder="Estatus" required>
             </div>
-            <button type="submit" name="add_cat" class="btn btn-primary">Agregar categoría</button>
+            <button type="submit" name="add_cat" class="btn btn-primary">Agregar Estatus</button>
         </form>
         </div>
       </div>
@@ -58,7 +58,7 @@
       <div class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Lista de categorías</span>
+          <span>Lista de Estatus</span>
        </strong>
       </div>
         <div class="panel-body">
@@ -66,7 +66,7 @@
             <thead>
                 <tr>
                     <th class="text-center" style="width: 50px;">#</th>
-                    <th>Categorías</th>
+                    <th>Estatus</th>
                     <th class="text-center" style="width: 100px;">Acciones</th>
                 </tr>
             </thead>
