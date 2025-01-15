@@ -32,9 +32,15 @@
     }  
      $diagnostico = remove_junk($db->escape($_POST['diagnostico']));
      $date        = make_date();
+     if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
+      $media_id = '0';
+    } else {
+      $media_id = remove_junk($db->escape($_POST['product-photo']));
+    }
 
-     $query  = "INSERT INTO products (recepciono, folio_sn, contacto_usuario, usuario, contrasena, equipo, modelo, marca, placa_af, accesorios, sn, problemas_equipo, programas, diagnostico, date) ";
-     $query .= "VALUES ('{$recepciono}', '{$folio_sn}', '{$contacto_usuario}', '{$usuario}', '{$contrasena}', '{$equipo}', '{$modelo}', '{$marca}', '{$placa_af}', '{$accesorios}', '{$sn}', '{$problemas_equipo}', '{$programas}', '{$diagnostico}', '{$date}')";
+
+     $query  = "INSERT INTO products (recepciono, folio_sn, contacto_usuario, usuario, contrasena, equipo, modelo, marca, placa_af, accesorios, sn, problemas_equipo, programas, diagnostico, date, media_id) ";
+     $query .= "VALUES ('{$recepciono}', '{$folio_sn}', '{$contacto_usuario}', '{$usuario}', '{$contrasena}', '{$equipo}', '{$modelo}', '{$marca}', '{$placa_af}', '{$accesorios}', '{$sn}', '{$problemas_equipo}', '{$programas}', '{$diagnostico}', '{$date}', '{$media_id}')";
      if($db->query($query)){
        $session->msg('s',"Equipo agregado exitosamente.");
        redirect('add_product.php', false);
@@ -275,6 +281,32 @@
            <div class="form-group">
             <label for="Diagnostico_Tecico_o_Procesos">Diagnostico Tecnico o Procesos</label>
             <textarea class="form-control" name="Diagnostico_Tecico_o_Procesos" placeholder="Describa el Diagnostico Tecico o Procesos"></textarea>
+          </div>
+          </div>
+</div>
+
+  <!-- /******************** */ -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <strong>
+          <span class="glyphicon glyphicon-th"></span>
+          <span>Agregar Imagen</span>
+        </strong>
+      </div>
+      <div class="panel-body">
+        <form method="post" action="add_product.php" class="clearfix">
+           <!-- Diagnostico Tecnico o Procesos-->
+           <div class="form-group">
+            
+<select class="form-control" name="product-photo">
+                      <option value="">Selecciona una imagen</option>
+                    <?php  foreach ($all_photo as $photo): ?>
+                      <option value="<?php echo (int)$photo['id'] ?>">
+                        <?php echo $photo['file_name'] ?></option>
+                    <?php endforeach; ?>
+                    </select>
           </div>
           </div>
 </div>
