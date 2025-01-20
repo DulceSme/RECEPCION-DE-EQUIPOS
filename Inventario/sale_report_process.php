@@ -28,7 +28,7 @@ $results = '';
 <html lang="en-US">
  <head>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <title>Reporte de ventas</title>
+   <title>Formato de Recepcion de Equipos</title>
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
    <style>
    @media print {
@@ -79,7 +79,7 @@ $results = '';
   <?php if($results): ?>
     <div class="page-break">
        <div class="sale-head pull-right">
-           <h1>Reporte de ventas</h1>
+           <h1>Formato de Recepcion de Equipos</h1>
            <strong><?php if(isset($start_date)){ echo $start_date;}?> a <?php if(isset($end_date)){echo $end_date;}?> </strong>
        </div>
       <table class="table table-border">

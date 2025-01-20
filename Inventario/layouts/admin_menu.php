@@ -18,17 +18,17 @@
   <li>
     <a href="categorie.php" >
       <i class="glyphicon glyphicon-indent-left"></i>
-      <span>Categorías</span>
+      <span>Estatus</span>
     </a>
   </li>
   <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-th-large"></i>
-      <span>Productos</span>
+      <span>Equipos</span>
     </a>
     <ul class="nav submenu">
-       <li><a href="product.php">Administrar productos</a> </li>
-       <li><a href="add_product.php">Agregar productos</a> </li>
+       <li><a href="product.php">Administrar Equipos</a> </li>
+       <li><a href="add_product.php">Agregar Equipos</a> </li>
    </ul>
   </li>
   <li>
@@ -37,7 +37,7 @@
       <span>Media</span>
     </a>
   </li>
-  <li>
+  <!-- <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-th-list"></i>
        <span>Ventas</span>
@@ -46,16 +46,16 @@
          <li><a href="sales.php">Administrar ventas</a> </li>
          <li><a href="add_sale.php">Agregar venta</a> </li>
      </ul>
-  </li>
+  </li> -->
   <li>
     <a href="#" class="submenu-toggle">
       <i class="glyphicon glyphicon-signal"></i>
-       <span>Reporte de ventas</span>
+       <span>Reporte de Equipos</span>
       </a>
       <ul class="nav submenu">
-        <li><a href="sales_report.php">Ventas por fecha </a></li>
-        <li><a href="monthly_sales.php">Ventas mensuales</a></li>
-        <li><a href="daily_sales.php">Ventas diarias</a> </li>
+        <li><a href="sales_report.php">Equipos por fecha </a></li>
+        <li><a href="monthly_sales.php">Equipos mensuales</a></li>
+        <li><a href="daily_sales.php">Equipos diarios</a> </li>
       </ul>
   </li>
 </ul>

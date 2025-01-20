@@ -39,7 +39,7 @@
 ?>
 <?php include_once('layouts/header.php'); ?>
   <?php echo display_msg($msg); ?>
-  <div class="row">
+  <!-- <div class="row"> -->
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>
@@ -79,6 +79,6 @@
       </div>
 
     </div>
-  </div>
+  <!-- </div> -->
 
 <?php include_once('layouts/footer.php'); ?>

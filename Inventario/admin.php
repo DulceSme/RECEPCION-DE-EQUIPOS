@@ -4,6 +4,7 @@
   // Checkin What level user has permission to view this page
    page_require_level(1);
 ?>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <?php
  $c_categorie     = count_by_id('categories');
  $c_product       = count_by_id('products');
@@ -34,40 +35,18 @@
     </div>
     <div class="col-md-3">
        <div class="panel panel-box clearfix">
-         <div class="panel-icon pull-left bg-red">
-          <i class="glyphicon glyphicon-list"></i>
-        </div>
-        <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_categorie['total']; ?> </h2>
-          <p class="text-muted">Categorías</p>
-        </div>
-       </div>
-    </div>
-    <div class="col-md-3">
-       <div class="panel panel-box clearfix">
          <div class="panel-icon pull-left bg-blue">
-          <i class="glyphicon glyphicon-shopping-cart"></i>
+         <i class="fa fa-laptop"></i>
         </div>
         <div class="panel-value pull-right">
           <h2 class="margin-top"> <?php  echo $c_product['total']; ?> </h2>
-          <p class="text-muted">Productos</p>
+          <p class="text-muted">Equipos</p>
         </div>
        </div>
     </div>
-    <div class="col-md-3">
-       <div class="panel panel-box clearfix">
-         <div class="panel-icon pull-left bg-yellow">
-          <i class="glyphicon glyphicon-usd"></i>
-        </div>
-        <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_sale['total']; ?></h2>
-          <p class="text-muted">Ventas</p>
-        </div>
-       </div>
-    </div>
-</div>
 
-  <div class="row">
+
+  <!-- <div class="row">
    <div class="col-md-4">
      <div class="panel panel-default">
        <div class="panel-heading">
@@ -127,20 +106,20 @@
            </td>
            <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
            <td>$<?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
-        </tr>
+        </tr> -->
 
-       <?php endforeach; ?>
+       <!-- <?php endforeach; ?>
        </tbody>
      </table>
     </div>
    </div>
-  </div>
+  </div> -->
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          <span>Productos recientemente añadidos</span>
+          <span>Equipos recientemente añadidos</span>
         </strong>
       </div>
       <div class="panel-body">
