@@ -300,13 +300,6 @@
            <!-- Diagnostico Tecnico o Procesos-->
            <div class="form-group">
             
-<select class="form-control" name="product-photo">
-                      <option value="">Selecciona una imagen</option>
-                    <?php  foreach ($all_photo as $photo): ?>
-                      <option value="<?php echo (int)$photo['id'] ?>">
-                        <?php echo $photo['file_name'] ?></option>
-                    <?php endforeach; ?>
-                    </select>
           </div>
           </div>
 </div>
