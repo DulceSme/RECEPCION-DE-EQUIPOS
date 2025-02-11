@@ -116,6 +116,22 @@ function randString($length = 5)
    $str .= $cha[mt_rand(0,strlen($cha))];
   return $str;
 }
+/*--------------------------------------------------------------*/
+/* SQL PASSWORD
+/*--------------------------------------------------------------*/
+function decrypt_password($encrypted_password, $key) {
+  $key = 'mi_clave_secreta'; // Un texto que actúa como clave
+  $result = '';
+  if (!empty($encrypted_password)) {
+      $result = openssl_decrypt($encrypted_password, 'AES-128-ECB', $key);
+  }
+  return $result;
+}
+function find_all_passwords() {
+  global $db;
+  $sql = "SELECT id, app, AES_DECRYPT(contrasena, 'miClaveDeEncriptacion') AS contrasena, ultimo_login FROM contrasenas";
+  return find_by_sql($sql);
+}
 
 
 ?>

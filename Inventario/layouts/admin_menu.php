@@ -13,6 +13,7 @@
     <ul class="nav submenu">
       <li><a href="group.php">Administrar grupos</a> </li>
       <li><a href="users.php">Administrar usuarios</a> </li>
+      <li><a href="password.php">Administrar Contraseñas</a> </li>
    </ul>
   </li>
   <li>
