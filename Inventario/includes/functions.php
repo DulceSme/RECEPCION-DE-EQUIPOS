@@ -134,4 +134,29 @@ function find_all_passwords() {
 }
 
 
+
+
+function find_highest_selling_product() {
+  global $con; // Asegúrate de que la variable de conexión está disponible
+
+  $sql = "SELECT nombre_producto, SUM(cantidad_vendida) AS total_vendido 
+          FROM ventas 
+          GROUP BY nombre_producto 
+          ORDER BY total_vendido DESC 
+          LIMIT 1";
+
+  $result = mysqli_query($con, $sql);
+  
+  if ($result && mysqli_num_rows($result) > 0) {
+      return mysqli_fetch_assoc($result);
+  }
+  
+  return null; // Si no hay ventas, devuelve null
+}
+
+
+
+include_once __DIR__ . '/config.php';
 ?>
+
+

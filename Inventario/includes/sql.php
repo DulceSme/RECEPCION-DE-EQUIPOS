@@ -204,82 +204,93 @@ function tableExists($table){
         endif;
 
      }
-   /*--------------------------------------------------------------*/
-   /* Function for Finding all product name
-   /* JOIN with categorie  and media database table
-   /*--------------------------------------------------------------*/
-  function join_product_table(){
-     global $db;
-     $sql  =" SELECT p.id,p.name,p.quantity,p.buy_price,p.sale_price,p.media_id,p.date,c.name";
-    $sql  .=" AS categorie,m.file_name AS image";
-    $sql  .=" FROM products p";
-    $sql  .=" LEFT JOIN categories c ON c.id = p.categorie_id";
-    $sql  .=" LEFT JOIN media m ON m.id = p.media_id";
-    $sql  .=" ORDER BY p.id ASC";
-    return find_by_sql($sql);
-
-   }
-  /*--------------------------------------------------------------*/
-  /* Function for Finding all product name
-  /* Request coming from ajax.php for auto suggest
-  /*--------------------------------------------------------------*/
-
-   function find_product_by_title($product_name){
-     global $db;
-     $p_name = remove_junk($db->escape($product_name));
-     $sql = "SELECT name FROM products WHERE name like '%$p_name%' LIMIT 5";
-     $result = find_by_sql($sql);
-     return $result;
-   }
-
-  /*--------------------------------------------------------------*/
-  /* Function for Finding all product info by product title
-  /* Request coming from ajax.php
-  /*--------------------------------------------------------------*/
-  function find_all_product_info_by_title($title){
-    global $db;
-    $sql  = "SELECT * FROM products ";
-    $sql .= " WHERE name ='{$title}'";
-    $sql .=" LIMIT 1";
-    return find_by_sql($sql);
+     function join_product_table(){
+      global $db;
+      $sql  = "SELECT p.id, p.recepciono, p.folio_sn, p.contacto_usuario, p.usuario, p.equipo, p.modelo, p.marca, 
+                      p.placa_af, p.accesorios, p.sn, p.problemas_equipo, p.programas, p.diagnostico, p.date, 
+                      m.file_name AS image, c.name AS categoria";
+      $sql .= " FROM products p";
+      $sql .= " LEFT JOIN categories c ON c.id = p.categorie_id";
+      $sql .= " LEFT JOIN media m ON m.id = p.media_id";
+      $sql .= " ORDER BY p.id ASC";
+      return find_by_sql($sql);
   }
-
+  
   /*--------------------------------------------------------------*/
-  /* Function for Update product quantity
+  /* Función para buscar equipos por folio SN (auto-sugerencias) */
   /*--------------------------------------------------------------*/
-  function update_product_qty($qty,$p_id){
-    global $db;
-    $qty = (int) $qty;
-    $id  = (int)$p_id;
-    $sql = "UPDATE products SET quantity=quantity -'{$qty}' WHERE id = '{$id}'";
-    $result = $db->query($sql);
-    return($db->affected_rows() === 1 ? true : false);
-
+  function find_product_by_folio($folio_sn){
+      global $db;
+      $folio = remove_junk($db->escape($folio_sn));
+      $sql = "SELECT folio_sn FROM products WHERE folio_sn LIKE '%$folio%' LIMIT 5";
+      return find_by_sql($sql);
   }
+  
   /*--------------------------------------------------------------*/
-  /* Function for Display Recent product Added
+  /* Función para obtener toda la información de un equipo por folio SN */
   /*--------------------------------------------------------------*/
- function find_recent_product_added($limit){
-   global $db;
-   $sql   = " SELECT p.id,p.name,p.sale_price,p.media_id,c.name AS categorie,";
-   $sql  .= "m.file_name AS image FROM products p";
-   $sql  .= " LEFT JOIN categories c ON c.id = p.categorie_id";
-   $sql  .= " LEFT JOIN media m ON m.id = p.media_id";
-   $sql  .= " ORDER BY p.id DESC LIMIT ".$db->escape((int)$limit);
-   return find_by_sql($sql);
- }
- /*--------------------------------------------------------------*/
- /* Function for Find Highest saleing Product
- /*--------------------------------------------------------------*/
- function find_higest_saleing_product($limit){
-   global $db;
-   $sql  = "SELECT p.name, COUNT(s.product_id) AS totalSold, SUM(s.qty) AS totalQty";
-   $sql .= " FROM sales s";
-   $sql .= " LEFT JOIN products p ON p.id = s.product_id ";
-   $sql .= " GROUP BY s.product_id";
-   $sql .= " ORDER BY SUM(s.qty) DESC LIMIT ".$db->escape((int)$limit);
-   return $db->query($sql);
- }
+  function find_all_product_info_by_folio($folio_sn){
+      global $db;
+      $sql = "SELECT * FROM products WHERE folio_sn = '{$folio_sn}' LIMIT 1";
+      return find_by_sql($sql);
+  }
+  
+  /*--------------------------------------------------------------*/
+  /* Función para actualizar la información de un equipo */
+  /*--------------------------------------------------------------*/
+  function update_product_info($id, $data){
+      global $db;
+      $id = (int) $id;
+  
+      $sql = "UPDATE products SET 
+                  recepciono = '{$data['recepciono']}', 
+                  contacto_usuario = '{$data['contacto_usuario']}', 
+                  usuario = '{$data['usuario']}',
+                  contrasena = '{$data['contrasena']}',
+                  equipo = '{$data['equipo']}',
+                  modelo = '{$data['modelo']}',
+                  marca = '{$data['marca']}',
+                  placa_af = '{$data['placa_af']}',
+                  accesorios = '{$data['accesorios']}',
+                  sn = '{$data['sn']}',
+                  problemas_equipo = '{$data['problemas_equipo']}',
+                  programas = '{$data['programas']}',
+                  diagnostico = '{$data['diagnostico']}',
+                  date = NOW()
+              WHERE id = '{$id}'";
+  
+      $result = $db->query($sql);
+      return ($db->affected_rows() === 1 ? true : false);
+  }
+  
+  /*--------------------------------------------------------------*/
+  /* Función para mostrar los equipos recientemente agregados */
+  /*--------------------------------------------------------------*/
+  function find_recent_product_added($limit){
+      global $db;
+      $sql = "SELECT p.id, p.recepciono, p.folio_sn, p.equipo, p.modelo, p.marca, p.date, 
+                     m.file_name AS image, c.name AS categoria 
+              FROM products p
+              LEFT JOIN categories c ON c.id = p.categorie_id
+              LEFT JOIN media m ON m.id = p.media_id
+              ORDER BY p.id DESC 
+              LIMIT ".$db->escape((int)$limit);
+      return find_by_sql($sql);
+  }
+  
+  /*--------------------------------------------------------------*/
+  /* Función para encontrar los equipos con más reportes */
+  /*--------------------------------------------------------------*/
+  function find_most_reported_equipment($limit){
+      global $db;
+      $sql  = "SELECT p.equipo, COUNT(r.product_id) AS totalReports";
+      $sql .= " FROM reports r";
+      $sql .= " LEFT JOIN products p ON p.id = r.product_id ";
+      $sql .= " GROUP BY r.product_id";
+      $sql .= " ORDER BY COUNT(r.product_id) DESC LIMIT ".$db->escape((int)$limit);
+      return find_by_sql($sql);
+  }
+  
  /*--------------------------------------------------------------*/
  /* Function for find all sales
  /*--------------------------------------------------------------*/

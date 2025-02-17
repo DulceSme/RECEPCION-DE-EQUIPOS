@@ -305,9 +305,7 @@
 </div>
 
 
-
-
-          
+       
               <button type="submit" name="add_product" class="btn btn-danger">Agregar Equipo</button>
           </form>
          </div>

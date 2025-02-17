@@ -1,4 +1,7 @@
 <?php
+include_once 'includes/functions.php';
+// Asegúrate de colocar la ruta correcta
+
   $page_title = 'Admin página de inicio';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
@@ -10,7 +13,14 @@
  $c_product       = count_by_id('products');
  $c_sale          = count_by_id('sales');
  $c_user          = count_by_id('users');
- $products_sold   = find_higest_saleing_product('10');
+ $producto_mas_vendido = find_highest_selling_product();
+ if ($producto_mas_vendido) {
+     echo "El producto más vendido es: " . $producto_mas_vendido['nombre_producto'] . 
+          " con " . $producto_mas_vendido['total_vendido'] . " unidades vendidas.";
+ } else {
+     echo "No hay productos vendidos aún.";
+ }
+ 
  $recent_products = find_recent_product_added('5');
  $recent_sales    = find_recent_sale_added('5')
 ?>

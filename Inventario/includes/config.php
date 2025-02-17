@@ -1,9 +1,15 @@
 <?php
+// Definir constantes de conexión
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'bd');
 
+// Conectar a la base de datos
+$con = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
-  define( 'DB_HOST', 'localhost' );          // Set database host
-  define( 'DB_USER', 'root' );             // Set database user
-  define( 'DB_PASS', '' );             // Set database password
-  define( 'DB_NAME', 'bd' );        // Set database name
-
+// Verificar si la conexión fue exitosa
+if (!$con) {
+    die("Error de conexión a la base de datos: " . mysqli_connect_error());
+}
 ?>
