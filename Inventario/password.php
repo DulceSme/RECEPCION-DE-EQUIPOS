@@ -31,8 +31,9 @@ $all_passwords = find_all_passwords();
           <tr>
             <th class="text-center" style="width: 50px;">#</th>
             <th>Aplicación</th>
+            <th>Usuario</th>
             <th>Contraseña</th>
-            <th>Última Actualizacion</th>
+            <th>Última Actualización</th>
             <th class="text-center" style="width: 100px;">Operaciones</th>
           </tr>
         </thead>
@@ -42,6 +43,7 @@ $all_passwords = find_all_passwords();
   <tr>
     <td class="text-center"><?php echo count_id(); ?></td>
     <td><?php echo remove_junk(ucwords($password['app'])); ?></td>
+    <td><?php echo remove_junk($password['usuario']); ?></td>
     <td>
       <div class="password-container">
         <span class="password-text" style="display: none;">

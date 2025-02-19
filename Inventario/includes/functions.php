@@ -119,17 +119,33 @@ function randString($length = 5)
 /*--------------------------------------------------------------*/
 /* SQL PASSWORD
 /*--------------------------------------------------------------*/
-function decrypt_password($encrypted_password, $key) {
-  $key = 'mi_clave_secreta'; // Un texto que actúa como clave
-  $result = '';
-  if (!empty($encrypted_password)) {
-      $result = openssl_decrypt($encrypted_password, 'AES-128-ECB', $key);
-  }
-  return $result;
+function encrypt_password($password) {
+  $encryption_key = 'miClaveDeEncriptacion'; // Clave secreta (debe ser la misma para desencriptar)
+  $encrypted_password = openssl_encrypt(
+      $password,
+      'AES-128-ECB',
+      $encryption_key,
+      0
+  );
+  return $encrypted_password;
 }
+
+
+function decrypt_password($encrypted_password) {
+  $encryption_key = 'miClaveDeEncriptacion'; // Misma clave usada en la encriptación
+  $decrypted_password = openssl_decrypt(
+      $encrypted_password,
+      'AES-128-ECB',
+      $encryption_key,
+      0
+  );
+  
+  return $decrypted_password ?: 'Error al desencriptar';
+}
+
 function find_all_passwords() {
   global $db;
-  $sql = "SELECT id, app, AES_DECRYPT(contrasena, 'miClaveDeEncriptacion') AS contrasena, ultimo_login FROM contrasenas";
+  $sql = "SELECT id, app,usuario, AES_DECRYPT(contrasena, 'miClaveDeEncriptacion') AS contrasena, ultimo_login FROM contrasenas";
   return find_by_sql($sql);
 }
 
@@ -139,8 +155,8 @@ function find_all_passwords() {
 function find_highest_selling_product() {
   global $con; // Asegúrate de que la variable de conexión está disponible
 
-  $sql = "SELECT nombre_producto, SUM(cantidad_vendida) AS total_vendido 
-          FROM ventas 
+  $sql = "SELECT nombre_producto, SUM(price) AS total_vendido 
+          FROM sales 
           GROUP BY nombre_producto 
           ORDER BY total_vendido DESC 
           LIMIT 1";

@@ -271,7 +271,7 @@ function tableExists($table){
       $sql = "SELECT p.id, p.recepciono, p.folio_sn, p.equipo, p.modelo, p.marca, p.date, 
                      m.file_name AS image, c.name AS categoria 
               FROM products p
-              LEFT JOIN categories c ON c.id = p.categorie_id
+              LEFT JOIN categories c ON c.id = p.categoria_id
               LEFT JOIN media m ON m.id = p.media_id
               ORDER BY p.id DESC 
               LIMIT ".$db->escape((int)$limit);

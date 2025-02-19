@@ -4,11 +4,12 @@ require_once('includes/load.php');
 page_require_level(1);
 
 if (isset($_POST['add_password'])) {
-    $req_fields = array('app-name', 'password');
+    $req_fields = array('app-name', 'username', 'password');
     validate_fields($req_fields);
 
     if (empty($errors)) {
         $app = remove_junk($db->escape($_POST['app-name']));
+        $username = remove_junk($db->escape($_POST['username']));
         $password = remove_junk($db->escape($_POST['password']));
        
 
@@ -20,8 +21,8 @@ if (isset($_POST['add_password'])) {
             $encryption_key
         );
 
-        $query = "INSERT INTO contrasenas (app, contrasena) VALUES (";
-        $query .= "'{$app}', '{$encrypted_password}')";
+        $query = "INSERT INTO contrasenas (app, usuario, contrasena) VALUES (";
+        $query .= "'{$app}', '{$username}', '{$encrypted_password}')";
         
         if ($db->query($query)) {
             $session->msg('s', "Contraseña añadida exitosamente.");
@@ -56,8 +57,12 @@ if (isset($_POST['add_password'])) {
                     <input type="text" class="form-control" name="app-name" placeholder="Nombre de la aplicación" required>
                 </div>
                 <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" class="form-control" name="username" placeholder="Usuario" required>
+                </div>
+                <div class="form-group">
                     <label for="password">Contraseña</label>
-                    <input type="password" class="form-control" name="password" placeholder="contrasena" required>
+                    <input type="password" class="form-control" name="password" placeholder="Contraseña" required>
                 </div>
                 <div class="form-group clearfix">
                     <button type="submit" name="add_password" class="btn btn-primary">Guardar</button>
