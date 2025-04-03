@@ -1,4 +1,10 @@
 <?php
+<<<<<<< Updated upstream
+=======
+include_once 'includes/functions.php';
+ // Asegúrate de colocar la ruta correcta
+
+>>>>>>> Stashed changes
   $page_title = 'Admin página de inicio';
   require_once('includes/load.php');
   // Checkin What level user has permission to view this page
@@ -122,7 +128,7 @@
           <span>Equipos recientemente añadidos</span>
         </strong>
       </div>
-      <div class="panel-body">
+      <div class="panel-body"> 
 
         <div class="list-group">
       <?php foreach ($recent_products as  $recent_product): ?>
