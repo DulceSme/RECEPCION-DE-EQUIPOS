@@ -54,8 +54,6 @@ include_once 'includes/functions.php';
         </div>
        </div>
     </div>
-
-
   <!-- <div class="row">
    <div class="col-md-4">
      <div class="panel panel-default">
@@ -161,7 +159,5 @@ include_once 'includes/functions.php';
   <div class="row">
 
   </div>
-
-
 
 <?php include_once('layouts/footer.php'); ?>
